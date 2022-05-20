@@ -4,7 +4,11 @@ import de.hska.iwii.db1.jpa.models.AbstractEntity;
 
 public abstract class AbstractFactory {
 	
-	protected AbstractEntity model;
+	private AbstractEntity model;
 	
 	public abstract AbstractEntity make();
+	
+	public AbstractEntity getModel() {
+		return this.model;
+	}
 }
