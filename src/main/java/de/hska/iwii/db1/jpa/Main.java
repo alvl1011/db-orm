@@ -110,9 +110,9 @@ public class Main {
 		
 		try {
 			String q = "FROM BookingEntry WHERE customer_id IN (SELECT id FROM Customer WHERE lastName LIKE :lastname)";
-			Query quer = jpa.getEntityManager().createQuery(q, BookingEntry.class);
-			quer.setParameter("lastname", lastname);
-			bookings = quer.getResultList();
+			Query query = jpa.getEntityManager().createQuery(q, BookingEntry.class);
+			query.setParameter("lastname", lastname);
+			bookings = query.getResultList();
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("Invalid operation.");
@@ -122,15 +122,15 @@ public class Main {
 			System.out.println("\nNichts gefunden.");
 		} else {
 			System.out.println("\nGefundene Buchungen:");
-	        for( BookingEntry b : bookings ) {
-	            Flight f = b.getFlight();
-	            Customer c = b.getCustomer();
+	        for( BookingEntry booking : bookings ) {
+	            Flight flight = booking.getFlight();
+	            Customer customer = booking.getCustomer();
 	            
-	            System.out.println( String.format("%s %s buchte am %s %s Plaetze, Flug %s von %s am %s", 
-	                c.getFirstName(), c.getLastName(),
-	                b.getCreatedAt().toString(), b.getSeatCount(),
-	                f.getFlightNumber(), f.getDepartureAirport(), 
-	                f.getDepartureTime().format(DateTimeFormatter.ISO_DATE)
+	            System.out.println( String.format("%s %s hat am %s %s Plätze, Flug %s von %s am %s gebucht", 
+	                customer.getFirstName(), customer.getLastName(),
+	                booking.getCreatedAt().toString(), booking.getSeatCount(),
+	                flight.getFlightNumber(), flight.getDepartureAirport(), 
+	                flight.getDepartureTime().format(DateTimeFormatter.ISO_DATE)
 	            ));
 	        }
 		}
