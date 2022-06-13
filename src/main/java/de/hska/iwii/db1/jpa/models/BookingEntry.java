@@ -20,7 +20,7 @@ public class BookingEntry extends AbstractEntity {
 	@Min(1)
 	@NotNull
 	@Column(name = "seat_count")
-	private Long seatCount;
+	private Integer seatCount;
 	
 	@NotNull
 	@ManyToOne
@@ -32,16 +32,12 @@ public class BookingEntry extends AbstractEntity {
 	@JoinColumn(name = "flight_id")
 	private Flight flight;
 	
-	@NotNull
-    @Column(name="booking_date_time", nullable = false)
-    private ZonedDateTime bookingDateTime;
-
 	
-	public Long getSeatCount() {
+	public Integer getSeatCount() {
 		return this.seatCount;
 	}
 	
-	public void setSeatCount(Long count) {
+	public void setSeatCount(Integer count) {
 		this.seatCount = count;
 	}
 	
@@ -59,13 +55,5 @@ public class BookingEntry extends AbstractEntity {
 	
 	public void setFlight(Flight flight) {
 		this.flight = flight;
-	}
-	
-	public ZonedDateTime getBookingDateTime() {
-		return this.bookingDateTime;
-	}
-	
-	public void setBookingDateTime(ZonedDateTime dateTime) {
-		this.bookingDateTime = dateTime;
 	}
 }
